@@ -1,0 +1,95 @@
+.login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(
+    to right top,
+    #13bdf8,
+    #009eee,
+    #007edf,
+    #005dcc,
+    #0338b1
+  );
+}
+
+.login-wrapper {
+  padding: 40px;
+  height: 80%;
+  width: 80%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+  color: #324567;
+  border-radius: 10px;
+  margin: 20px 0px;
+  max-width: 400px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.login-title {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.login-info-message {
+  font-weight: 300;
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.input-wrapper {
+  display: flex;
+  width: 100%;
+  border: 1px solid rgb(247, 237, 237);
+  border-radius: 10px;
+  align-items: center;
+  margin: 10px 0px;
+  padding: 10px;
+}
+
+.form-input {
+  padding: 5px;
+  width: 80%;
+  border: none;
+  font-size: 18px;
+  color: #5a719d;
+  margin-left: 10px;
+}
+
+.form-input:focus {
+  outline: none;
+}
+
+.submit-button {
+  color: white;
+  background-color: #0635f1;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 10px 0px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+.submit-button:hover {
+  background-color: #0a33d8;
+}
+
+@media screen and (max-width: 630px) {
+  .login-wrapper {
+    width: 90%;
+    height: 90%;
+    padding: 0px;
+  }
+}

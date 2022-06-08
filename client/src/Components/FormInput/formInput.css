@@ -1,0 +1,22 @@
+.form-input-container-in {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.label-in {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #373b7b;
+}
+
+.form-input-in {
+  padding: 15px 20px;
+  outline: none;
+  border: 1px solid grey;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  width: 100%;
+}

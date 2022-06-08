@@ -1,0 +1,36 @@
+.button {
+  min-width: 100px;
+  padding: 15px 10px;
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  font-weight: 600;
+  color: rgb(252, 36, 36);
+  background-color: white;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.button.outlined {
+  color: white;
+  border: 1.5px solid white;
+  background: none;
+}
+
+.button.inverted {
+  background-color: #373b7b;
+  color: white;
+}
+.button.inverted:hover {
+  background-color: #242854;
+  color: white;
+}
+
+.button.button.outlined:hover {
+  color: rgb(252, 36, 36);
+}
+
+.button:hover {
+  background-color: whitesmoke;
+}
