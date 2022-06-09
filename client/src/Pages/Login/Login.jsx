@@ -1,16 +1,21 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import "./login.css";
-import { GoPerson } from "react-icons/go";
 import { FaClipboard } from "react-icons/fa";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const mobileNo = useRef();
   const name = useRef();
-
+  const navigate = useNavigate();
   const { user, isFetching, error, dispatch } = useContext(AuthContext);
+  const server = process.env.REACT_APP_SERVER;
+
+  useEffect(() => {
+    if (user) navigate("/", { replace: true });
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,9 +24,10 @@ function Login() {
       mobileNo: mobileNo.current.value,
     };
     try {
-      const res = await axios.post("/auth/login", data);
+      const res = await axios.post(`${server}/auth/login`, data);
       localStorage.setItem("user", JSON.stringify(res.data));
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      navigate("/", { replace: true });
     } catch (e) {
       dispatch({ type: "LOGIN_FAIL", payload: e.message });
     }

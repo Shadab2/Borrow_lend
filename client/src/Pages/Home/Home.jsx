@@ -21,7 +21,7 @@ function Home() {
           <div className="home-button-container">
             <Button
               onClick={() => {
-                navigate("/login");
+                navigate("/borrow");
               }}
             >
               Borrow

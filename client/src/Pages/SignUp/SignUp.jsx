@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import "../Login/login.css";
 import { GoPerson } from "react-icons/go";
 import { FaClipboard } from "react-icons/fa";
@@ -9,10 +9,22 @@ function Login() {
   const mobileNo = useRef();
   const name = useRef();
   const gender = useRef();
+  const server = process.env.REACT_APP_SERVER;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const { data } = axios.post(`${server}/auth/signup`, {
+        name: name.current.value,
+        gender: gender.current.value,
+        mobileNo: mobileNo.current.value,
+      });
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
   };
+
   return (
     <div className="login">
       <div className="login-wrapper">
