@@ -1,25 +1,31 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import "../Login/login.css";
 import { GoPerson } from "react-icons/go";
 import { FaClipboard } from "react-icons/fa";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const mobileNo = useRef();
   const name = useRef();
   const gender = useRef();
   const server = process.env.REACT_APP_SERVER;
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const { data } = axios.post(`${server}/auth/signup`, {
         name: name.current.value,
-        gender: gender.current.value,
+        gender: gender.current.value.toLowerCase(),
         mobileNo: mobileNo.current.value,
       });
-      console.log(data);
+      toast.success("Account created successfully ", 1000);
+      setTimeout(() => {
+        navigate("/", { replace: true });
+      }, 2000);
     } catch (e) {
       console.log(e);
     }
@@ -27,6 +33,17 @@ function Login() {
 
   return (
     <div className="login">
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          success: {
+            style: {
+              background: "#373b7b",
+              color: "white",
+            },
+          },
+        }}
+      />
       <div className="login-wrapper">
         <div className="form-wrapper">
           <form onSubmit={handleSubmit} className="login-form">

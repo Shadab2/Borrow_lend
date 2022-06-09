@@ -21,7 +21,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={!user ? <Login /> : <Home />} />
         <Route path="/signup" element={!user ? <SignUp /> : <Home />} />
         <Route path="/borrow" element={!user ? <Home /> : <BorrowRequest />} />
       </Routes>

@@ -5,6 +5,7 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 function Login() {
   const mobileNo = useRef();
@@ -26,14 +27,29 @@ function Login() {
     try {
       const res = await axios.post(`${server}/auth/login`, data);
       localStorage.setItem("user", JSON.stringify(res.data));
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-      navigate("/", { replace: true });
+      toast.success("Login Successfull", 1000);
+      setTimeout(() => {
+        dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+        navigate("/", { replace: true });
+      }, 2000);
     } catch (e) {
       dispatch({ type: "LOGIN_FAIL", payload: e.message });
+      toast.error("Try again");
     }
   };
   return (
     <div className="login">
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          success: {
+            style: {
+              background: "#373b7b",
+              color: "white",
+            },
+          },
+        }}
+      />
       <div className="login-wrapper">
         <div className="form-wrapper">
           <form onSubmit={handleSubmit} className="login-form">
