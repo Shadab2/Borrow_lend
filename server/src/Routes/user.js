@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Transaction = require("../db/transaction");
 const UserBL = require("../db/user");
 
+//get all borrow
 router.get("/:id", async (req, res) => {
   try {
     const user = await UserBL.findById(req.params.id);
@@ -49,12 +50,15 @@ router.post("/borrow/:id", async (req, res) => {
     });
     await newTransaction.save();
     await borrower.updateOne({ $push: { borrowers: newTransaction._id } });
-    await lender.updateOne({ $push: { lenders: newTransaction_id } });
-    res.status(200).send("Request successfully made");
+    await lender.updateOne({ $push: { lenders: newTransaction._id } });
+    const resultingBorrower = await UserBL.findById(req.params.id);
+    res.status(200).send(resultingBorrower);
   } catch (e) {
     console.log(e);
     res.status(500).send({});
   }
 });
+
+//complete a payement
 
 module.exports = router;

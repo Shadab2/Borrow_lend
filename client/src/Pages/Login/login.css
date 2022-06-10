@@ -68,6 +68,16 @@
   margin-left: 10px;
 }
 
+.form-input.checkbox {
+  width: 50%;
+}
+
+.checkbox-input {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .form-input:focus {
   outline: none;
 }
@@ -84,6 +94,13 @@
 }
 .submit-button:hover {
   background-color: #0a33d8;
+}
+
+.otp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0px;
 }
 
 @media screen and (max-width: 630px) {
