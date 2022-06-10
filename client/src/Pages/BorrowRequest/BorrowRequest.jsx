@@ -14,12 +14,16 @@ function BorrowRequest() {
     Borrowed: [],
     Lent: [],
   });
-  console.log(transaction);
   const [data, setData] = useState({
     amount: 0,
     reason: "",
     duration: "",
     upi: "",
+  });
+
+  const [error, setError] = useState({
+    amount: "",
+    duration: "",
   });
 
   useEffect(() => {
@@ -35,11 +39,38 @@ function BorrowRequest() {
   }, [user]);
 
   const handleChange = (e) => {
+    if (e.target.name === "amount") {
+      if (isNaN(e.target.value)) {
+        setError((prev) => ({ ...prev, amount: "Enter a valid amount" }));
+        return;
+      }
+      setError((prev) => ({ ...prev, amount: "" }));
+    }
+    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleDateChange = (e) => {
+    if (new Date() >= new Date(e.target.value)) {
+      setError((prev) => ({
+        ...prev,
+        duration: "Provide a date greater than current date",
+      }));
+      return;
+    }
+    setError((prev) => ({
+      ...prev,
+      duration: "",
+    }));
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { amount, duration, reason, upi } = data;
+    if (!amount || !duration || !reason || !upi) {
+      toast.error("Feilds are required", 1000);
+      return;
+    }
     try {
       const response = await axios.post(
         `${server}/user/borrow/${user._id}`,
@@ -127,6 +158,7 @@ function BorrowRequest() {
             placeholder="Enter Amount in Rs"
             label="Amount"
             onChange={handleChange}
+            error={error.amount}
           />
           <FormInput
             type="text"
@@ -139,7 +171,8 @@ function BorrowRequest() {
             type="date"
             name="duration"
             label="Duration"
-            onChange={handleChange}
+            onChange={handleDateChange}
+            error={error.duration}
           />
           <FormInput
             type="text"
